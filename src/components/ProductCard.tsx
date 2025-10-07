@@ -92,7 +92,9 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
       <div className="flex flex-col gap-4 p-2 ">
         <h1 className="font-medium">{product.name}</h1>
-        <p className="text-sm text-gray-400">{product.shortDescription}</p>
+        <p className="text-sm text-gray-400 line-clamp-2">
+          {product.shortDescription}
+        </p>
 
         <div className="flex items-center gap-2 text-xs">
           <div className="flex flex-col gap-1">
