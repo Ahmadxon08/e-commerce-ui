@@ -59,6 +59,36 @@ const cartItems: CartItemsType[] = [
     selectedColor: "gray",
     selectedSize: "xl",
   },
+  {
+    id: 3,
+    name: "Puma Ultra Warm Zip",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 59.9,
+    sizes: ["s", "m", "l", "xl"],
+    colors: ["gray", "green"],
+    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+    quantity: 1,
+    selectedColor: "gray",
+    selectedSize: "xl",
+  },
+  {
+    id: 4,
+    name: "Puma Ultra Warm Zip",
+    shortDescription:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    description:
+      "Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit. Lorem ipsum dolor sit amet consect adipisicing elit lorem ipsum dolor sit.",
+    price: 59.9,
+    sizes: ["s", "m", "l", "xl"],
+    colors: ["gray", "green"],
+    images: { gray: "/products/2g.png", green: "/products/2gr.png" },
+    quantity: 1,
+    selectedColor: "gray",
+    selectedSize: "xl",
+  },
 ];
 const CartPage = () => {
   const [shippingForm, setShippingForm] = useState<shippingFormInputs | null>(
@@ -155,7 +185,7 @@ const CartPage = () => {
           )}
         </div>
         {/* details? */}
-        <div className="w-full flex-col rounded-md flex gap-6 h-max border-gray-100 shadow-lg p-4 md:max-w-4/12">
+        <div className="w-full flex-col rounded-md sticky top-6 flex gap-6 h-max border-gray-100 shadow-lg p-4 md:max-w-4/12">
           <h2>Cart Details</h2>
           <div className="flex flex-col gap-3">
             <div className="flex justify-between">
