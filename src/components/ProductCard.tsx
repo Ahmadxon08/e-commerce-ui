@@ -1,66 +1,63 @@
 "use client";
-import {
-  Footprints,
-  Glasses,
-  Briefcase,
-  Shirt,
-  ShoppingBasket,
-  Hand,
-  Venus,
-} from "lucide-react";
+
 import { ProductType } from "./types";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import useStore from "@/store/cartStore";
+import { formatCurrency } from "@/utils/utils";
+import { toast } from "react-toastify";
 
-const categories = [
-  {
-    name: "All",
-    icon: <ShoppingBasket className="w-4 h-4" />,
-    slug: "all",
-  },
-  {
-    name: "T-shirts",
-    icon: <Shirt className="w-4 h-4" />,
-    slug: "t-shirts",
-  },
-  {
-    name: "Shoes",
-    icon: <Footprints className="w-4 h-4" />,
-    slug: "shoes",
-  },
-  {
-    name: "Accessories",
-    icon: <Glasses className="w-4 h-4" />,
-    slug: "accessories",
-  },
-  {
-    name: "Bags",
-    icon: <Briefcase className="w-4 h-4" />,
-    slug: "bags",
-  },
-  {
-    name: "Dresses",
-    icon: <Venus className="w-4 h-4" />,
-    slug: "dresses",
-  },
-  {
-    name: "Jackets",
-    icon: <Shirt className="w-4 h-4" />,
-    slug: "jackets",
-  },
-  {
-    name: "Gloves",
-    icon: <Hand className="w-4 h-4" />,
-    slug: "gloves",
-  },
-];
+// const categories = [
+//   {
+//     name: "All",
+//     icon: <ShoppingBasket className="w-4 h-4" />,
+//     slug: "all",
+//   },
+//   {
+//     name: "T-shirts",
+//     icon: <Shirt className="w-4 h-4" />,
+//     slug: "t-shirts",
+//   },
+//   {
+//     name: "Shoes",
+//     icon: <Footprints className="w-4 h-4" />,
+//     slug: "shoes",
+//   },
+//   {
+//     name: "Accessories",
+//     icon: <Glasses className="w-4 h-4" />,
+//     slug: "accessories",
+//   },
+//   {
+//     name: "Bags",
+//     icon: <Briefcase className="w-4 h-4" />,
+//     slug: "bags",
+//   },
+//   {
+//     name: "Dresses",
+//     icon: <Venus className="w-4 h-4" />,
+//     slug: "dresses",
+//   },
+//   {
+//     name: "Jackets",
+//     icon: <Shirt className="w-4 h-4" />,
+//     slug: "jackets",
+//   },
+//   {
+//     name: "Gloves",
+//     icon: <Hand className="w-4 h-4" />,
+//     slug: "gloves",
+//   },
+// ];
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const [productTypes, setProductTypes] = useState({
     size: product.sizes[0],
     color: product.colors[0],
   });
+
+  const { addToCart } = useStore();
 
   const handleProductType = ({
     type,
@@ -73,6 +70,15 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       ...prev,
       [type]: value,
     }));
+  };
+  const handleAddtoCart = () => {
+    addToCart({
+      ...product,
+      quantity: 1,
+      selectedSize: productTypes.size,
+      selectedColor: productTypes.color,
+    });
+    toast.success(" Product  added to your cart!");
   };
   return (
     <div className="shadow-lg rounded-lg overflow-hidden">
@@ -144,8 +150,13 @@ const ProductCard = ({ product }: { product: ProductType }) => {
 
         {/* Price and add to cart button */}
         <div className="flex justify-between items-center">
-          <p className="font-medium">{product.price.toFixed(2)}</p>
-          <button className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 py-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2">
+          <p className="font-medium text-gray-600">
+            {formatCurrency(product.price)}
+          </p>
+          <button
+            onClick={handleAddtoCart}
+            className="ring-1 ring-gray-200 shadow-lg rounded-md px-2 py-1 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2"
+          >
             Add to Cart
           </button>
         </div>
